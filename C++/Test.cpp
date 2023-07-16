@@ -1,10 +1,10 @@
 #include <iostream>
 #include <algorithm>
 #include <vector>
-#include "ICollection.hpp"
+#include "Interfaces.hpp"
 
 using namespace std;
-//using namespace DataStructure;
+using namespace DataStructure;
 
 template <typename T>
 class Vector: public ICollection<T> {
@@ -34,6 +34,17 @@ public:
     }
 
     virtual bool Remove(T item){
+        typename vector<T>::iterator it = find(_vector.begin(), _vector.end(), item);
+
+        if(it != _vector.end()){
+            _vector.erase(it);
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    virtual bool RemoveAll(T item){
         bool isExist = (find(_vector.begin(), _vector.end(), item) != _vector.end());
 
         if(isExist){
